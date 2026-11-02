@@ -1,34 +1,13 @@
-# Free presentation deployment. Render's free PostgreSQL database expires after 30 days.
+# Free presentation service. SQLite data on the free instance is temporary.
 services:
   - type: web
     name: acremind-demo
     runtime: docker
     plan: free
     region: frankfurt
-    healthCheckPath: /api.php?action=session
+    healthCheckPath: /
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: acremind-demo-db
-          property: connectionString
-      - key: FFMS_SECURE_COOKIES
-        value: "1"
       - key: APP_TIMEZONE
         value: Africa/Lusaka
       - key: GEMINI_MODEL
         value: gemini-3.5-flash
-      - key: GEMINI_API_KEY
-        sync: false
-      - key: APP_URL
-        sync: false
-      - key: PASSWORD_RESET_WEBHOOK_URL
-        sync: false
-      - key: PASSWORD_RESET_WEBHOOK_TOKEN
-        sync: false
-databases:
-  - name: acremind-demo-db
-    plan: free
-    region: frankfurt
-    databaseName: acremind
-    user: acremind
-    ipAllowList: []
