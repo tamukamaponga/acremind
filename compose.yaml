@@ -1,0 +1,19 @@
+services:
+  farm:
+    build: .
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - farm-data:/var/www/html/storage
+    environment:
+      APP_TIMEZONE: Africa/Lusaka
+      APP_URL: ${APP_URL:-}
+      PASSWORD_RESET_WEBHOOK_URL: ${PASSWORD_RESET_WEBHOOK_URL:-}
+      PASSWORD_RESET_WEBHOOK_TOKEN: ${PASSWORD_RESET_WEBHOOK_TOKEN:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.5-flash}
+      NOTIFICATION_WEBHOOK_URL: ${NOTIFICATION_WEBHOOK_URL:-}
+      NOTIFICATION_WEBHOOK_TOKEN: ${NOTIFICATION_WEBHOOK_TOKEN:-}
+    restart: unless-stopped
+volumes:
+  farm-data:

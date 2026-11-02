@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "@php-wasm/cli": "3.1.53",
+    "@php-wasm/node": "3.1.53",
+    "@php-wasm/universal": "3.1.53",
+    "@playwright/test": "1.63.0",
+    "nodemailer": "10.0.10"
+  },
+  "name": "acremind",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node scripts/start.mjs",
+    "php": "node node_modules/@php-wasm/cli/php-wasm.js",
+    "test": "node tests/integration.mjs",
+    "check": "node scripts/check.mjs",
+    "backup": "node node_modules/@php-wasm/cli/php-wasm.js scripts/backup.php",
+    "format": "prettier --write \"public/**/*.{js,css,php}\" \"src/**/*.{php,json}\" \"scripts/**/*.{php,cjs,mjs}\" \"tests/**/*.mjs\" \"docs/**/*.md\" README.md .prettierrc.json package.json",
+    "format:check": "prettier --check \"public/**/*.{js,css,php}\" \"src/**/*.{php,json}\" \"scripts/**/*.{php,cjs,mjs}\" \"tests/**/*.mjs\" \"docs/**/*.md\" README.md .prettierrc.json package.json",
+    "catalog": "node scripts/build-catalog.cjs",
+    "configure-email": "node scripts/configure-email.mjs",
+    "configure-ai": "node scripts/configure-ai.mjs"
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "0.25.0",
+    "prettier": "3.9.6"
+  }
+}

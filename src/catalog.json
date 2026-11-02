@@ -1,0 +1,2366 @@
+{
+  "farms": {
+    "id": "farms",
+    "label": "Farms",
+    "group": "Land & crops",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Farm name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "location",
+        "label": "Location",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "hectares",
+        "label": "Area (ha)",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "latitude",
+        "label": "Latitude",
+        "type": "number",
+        "required": false,
+        "min": -90,
+        "step": "0.01"
+      },
+      {
+        "key": "longitude",
+        "label": "Longitude",
+        "type": "number",
+        "required": false,
+        "min": -180,
+        "step": "0.01"
+      },
+      {
+        "key": "boundary",
+        "label": "Boundary coordinates (GeoJSON)",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Register farms, locations and land boundaries."
+  },
+  "fields": {
+    "id": "fields",
+    "label": "Fields",
+    "group": "Land & crops",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Field name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "hectares",
+        "label": "Area (ha)",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "soil",
+        "label": "Soil type",
+        "type": "select",
+        "required": true,
+        "options": ["Loam", "Clay", "Sandy", "Silt", "Peat", "Chalk", "Other"]
+      },
+      {
+        "key": "ph",
+        "label": "Soil pH",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "soil_condition",
+        "label": "Soil condition",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "land_use",
+        "label": "Land use plan",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Manage field size, soil condition and land use."
+  },
+  "crops": {
+    "id": "crops",
+    "label": "Crop varieties",
+    "group": "Land & crops",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Crop name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "variety",
+        "label": "Variety",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "maturity_days",
+        "label": "Days to maturity",
+        "type": "number",
+        "required": true,
+        "min": 1,
+        "step": "0.01"
+      },
+      {
+        "key": "target_yield",
+        "label": "Target yield (kg/ha)",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Maintain the crop and variety register."
+  },
+  "plantings": {
+    "id": "plantings",
+    "label": "Plantings",
+    "group": "Land & crops",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Planting name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "field",
+        "label": "Field",
+        "type": "reference",
+        "required": true,
+        "ref": "fields"
+      },
+      {
+        "key": "crop",
+        "label": "Crop variety",
+        "type": "reference",
+        "required": true,
+        "ref": "crops"
+      },
+      {
+        "key": "planted_on",
+        "label": "Planting date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "harvest_on",
+        "label": "Expected harvest",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "hectares",
+        "label": "Planted area (ha)",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "spacing",
+        "label": "Row spacing (cm)",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "density",
+        "label": "Plants per hectare",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "seed_quantity",
+        "label": "Seed quantity (kg)",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "expected_yield",
+        "label": "Expected yield (kg)",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "stage",
+        "label": "Growth stage",
+        "type": "select",
+        "required": true,
+        "options": ["Planned", "Planted", "Growing", "Flowering", "Ready", "Harvested", "Failed"]
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Plan planting, monitor crop stages and preserve field rotation history."
+  },
+  "applications": {
+    "id": "applications",
+    "label": "Crop applications",
+    "group": "Land & crops",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Application",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "planting",
+        "label": "Planting",
+        "type": "reference",
+        "required": true,
+        "ref": "plantings"
+      },
+      {
+        "key": "kind",
+        "label": "Application type",
+        "type": "select",
+        "required": true,
+        "options": ["Fertilizer", "Manure", "Spraying", "Seed treatment"]
+      },
+      {
+        "key": "product",
+        "label": "Product",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "quantity",
+        "label": "Quantity",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "unit",
+        "label": "Unit",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "date",
+        "label": "Application date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "next_due",
+        "label": "Next application",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "cost",
+        "label": "Cost",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "operator",
+        "label": "Operator",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Record fertilizer, manure and crop protection applications."
+  },
+  "scouting": {
+    "id": "scouting",
+    "label": "Pest & disease",
+    "group": "Land & crops",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Observation",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "planting",
+        "label": "Planting",
+        "type": "reference",
+        "required": true,
+        "ref": "plantings"
+      },
+      {
+        "key": "date",
+        "label": "Scouting date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "pest",
+        "label": "Pest or disease",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "severity",
+        "label": "Severity",
+        "type": "select",
+        "required": true,
+        "options": ["Low", "Medium", "High", "Critical"]
+      },
+      {
+        "key": "symptoms",
+        "label": "Observed symptoms",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "control",
+        "label": "Control measures / agronomist advice",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "status",
+        "label": "Status",
+        "type": "select",
+        "required": true,
+        "options": ["Open", "Treating", "Resolved"]
+      },
+      {
+        "key": "effectiveness",
+        "label": "Treatment effectiveness",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Track scouting, treatments and outbreak severity."
+  },
+  "harvests": {
+    "id": "harvests",
+    "label": "Harvests",
+    "group": "Land & crops",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Harvest batch",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "planting",
+        "label": "Planting",
+        "type": "reference",
+        "required": true,
+        "ref": "plantings"
+      },
+      {
+        "key": "date",
+        "label": "Harvest date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "quantity",
+        "label": "Gross harvest (kg)",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "loss",
+        "label": "Loss / wastage (kg)",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "grade",
+        "label": "Grade",
+        "type": "select",
+        "required": true,
+        "options": ["A", "B", "C", "Ungraded"]
+      },
+      {
+        "key": "item",
+        "label": "Produce stock item (kg)",
+        "type": "reference",
+        "required": false,
+        "ref": "inventory"
+      },
+      {
+        "key": "warehouse",
+        "label": "Storage location",
+        "type": "reference",
+        "required": false,
+        "ref": "warehouses"
+      },
+      {
+        "key": "handling",
+        "label": "Handling and packaging",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Record actual production, losses, quality and stock received."
+  },
+  "animals": {
+    "id": "animals",
+    "label": "Animals",
+    "group": "Livestock",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Animal identification",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "species",
+        "label": "Species",
+        "type": "select",
+        "required": true,
+        "options": ["Cattle", "Goat", "Sheep", "Pig", "Chicken", "Duck", "Other"]
+      },
+      {
+        "key": "breed",
+        "label": "Breed",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "sex",
+        "label": "Sex",
+        "type": "select",
+        "required": true,
+        "options": ["Female", "Male", "Unknown"]
+      },
+      {
+        "key": "birth_date",
+        "label": "Birth date",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "weight",
+        "label": "Weight (kg)",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "status",
+        "label": "Status",
+        "type": "select",
+        "required": true,
+        "options": ["Active", "Sold", "Dead"]
+      },
+      {
+        "key": "death_date",
+        "label": "Death date",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "death_cause",
+        "label": "Cause of death",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Register livestock, births, identification and mortality."
+  },
+  "animal_health": {
+    "id": "animal_health",
+    "label": "Health & vaccinations",
+    "group": "Livestock",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Health record",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "animal",
+        "label": "Animal",
+        "type": "reference",
+        "required": true,
+        "ref": "animals"
+      },
+      {
+        "key": "kind",
+        "label": "Type",
+        "type": "select",
+        "required": true,
+        "options": ["Vaccination", "Treatment", "Examination"]
+      },
+      {
+        "key": "date",
+        "label": "Date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "medicine",
+        "label": "Medicine / vaccine",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "dose",
+        "label": "Dose",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "diagnosis",
+        "label": "Diagnosis",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "next_due",
+        "label": "Next due",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "cost",
+        "label": "Cost",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "vet",
+        "label": "Veterinarian",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Keep vaccination schedules and veterinary treatment history."
+  },
+  "feeding": {
+    "id": "feeding",
+    "label": "Feed & growth",
+    "group": "Livestock",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Feed / growth record",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "animal",
+        "label": "Animal",
+        "type": "reference",
+        "required": true,
+        "ref": "animals"
+      },
+      {
+        "key": "date",
+        "label": "Date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "feed",
+        "label": "Feed",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "quantity",
+        "label": "Feed (kg)",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "weight",
+        "label": "Measured weight (kg)",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "cost",
+        "label": "Cost",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Track feeding, feed costs and animal growth."
+  },
+  "breeding": {
+    "id": "breeding",
+    "label": "Breeding",
+    "group": "Livestock",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Breeding record",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "animal",
+        "label": "Dam",
+        "type": "reference",
+        "required": true,
+        "ref": "animals"
+      },
+      {
+        "key": "sire",
+        "label": "Sire",
+        "type": "reference",
+        "required": false,
+        "ref": "animals"
+      },
+      {
+        "key": "date",
+        "label": "Breeding date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "next_due",
+        "label": "Expected birth",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "status",
+        "label": "Outcome",
+        "type": "select",
+        "required": true,
+        "options": ["Pending", "Confirmed", "Delivered", "Unsuccessful"]
+      },
+      {
+        "key": "offspring",
+        "label": "Offspring count",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Manage breeding and expected births."
+  },
+  "animal_production": {
+    "id": "animal_production",
+    "label": "Livestock production",
+    "group": "Livestock",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Production record",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "animal",
+        "label": "Animal",
+        "type": "reference",
+        "required": true,
+        "ref": "animals"
+      },
+      {
+        "key": "date",
+        "label": "Date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "product",
+        "label": "Product",
+        "type": "select",
+        "required": true,
+        "options": ["Milk", "Eggs", "Wool", "Meat", "Other"]
+      },
+      {
+        "key": "quantity",
+        "label": "Quantity",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "unit",
+        "label": "Unit",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "value",
+        "label": "Estimated value",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Record livestock output and production value."
+  },
+  "water_sources": {
+    "id": "water_sources",
+    "label": "Water sources",
+    "group": "Resources",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Water source",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "kind",
+        "label": "Type",
+        "type": "select",
+        "required": true,
+        "options": ["Borehole", "River", "Dam", "Tank", "Municipal", "Other"]
+      },
+      {
+        "key": "capacity",
+        "label": "Capacity (m³)",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "status",
+        "label": "Status",
+        "type": "select",
+        "required": true,
+        "options": ["Operational", "Low", "Unavailable"]
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Register water sources and available capacity."
+  },
+  "irrigation_systems": {
+    "id": "irrigation_systems",
+    "label": "Irrigation systems",
+    "group": "Resources",
+    "fields": [
+      {
+        "key": "name",
+        "label": "System name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "source",
+        "label": "Water source",
+        "type": "reference",
+        "required": true,
+        "ref": "water_sources"
+      },
+      {
+        "key": "kind",
+        "label": "System type",
+        "type": "select",
+        "required": true,
+        "options": ["Drip", "Sprinkler", "Flood", "Pivot", "Other"]
+      },
+      {
+        "key": "pump",
+        "label": "Pump / equipment",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "status",
+        "label": "Status",
+        "type": "select",
+        "required": true,
+        "options": ["Operational", "Maintenance", "Fault"]
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Manage irrigation infrastructure and faults."
+  },
+  "irrigation": {
+    "id": "irrigation",
+    "label": "Irrigation schedule",
+    "group": "Resources",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Irrigation task",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "field",
+        "label": "Field",
+        "type": "reference",
+        "required": true,
+        "ref": "fields"
+      },
+      {
+        "key": "system",
+        "label": "Irrigation system",
+        "type": "reference",
+        "required": true,
+        "ref": "irrigation_systems"
+      },
+      {
+        "key": "date",
+        "label": "Scheduled date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "water",
+        "label": "Water used (m³)",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "hours",
+        "label": "Pump operating hours",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "cost",
+        "label": "Cost",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "status",
+        "label": "Status",
+        "type": "select",
+        "required": true,
+        "options": ["Scheduled", "Completed", "Problem", "Cancelled"]
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Schedule irrigation and track water use, operating time and costs."
+  },
+  "inventory": {
+    "id": "inventory",
+    "label": "Inventory",
+    "group": "Resources",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Stock item",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "category",
+        "label": "Category",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Seed",
+          "Fertilizer",
+          "Chemical",
+          "Feed",
+          "Veterinary",
+          "Packaging",
+          "Fuel",
+          "Tool",
+          "Produce",
+          "Other"
+        ]
+      },
+      {
+        "key": "unit",
+        "label": "Unit (use kg for harvest produce)",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "opening",
+        "label": "Opening quantity",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "minimum",
+        "label": "Low-stock threshold",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "unit_cost",
+        "label": "Unit value",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "expiry",
+        "label": "Expiry date",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Track inputs and produce with balances calculated from stock movements."
+  },
+  "stock_moves": {
+    "id": "stock_moves",
+    "label": "Stock movements",
+    "group": "Resources",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Movement reference",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "item",
+        "label": "Item",
+        "type": "reference",
+        "required": true,
+        "ref": "inventory"
+      },
+      {
+        "key": "direction",
+        "label": "Direction",
+        "type": "select",
+        "required": true,
+        "options": ["In", "Out"]
+      },
+      {
+        "key": "quantity",
+        "label": "Quantity",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "date",
+        "label": "Date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "reason",
+        "label": "Reason",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Purchase adjustment",
+          "Consumption",
+          "Transfer",
+          "Spoilage",
+          "Return",
+          "Correction"
+        ]
+      },
+      {
+        "key": "warehouse",
+        "label": "Warehouse",
+        "type": "reference",
+        "required": false,
+        "ref": "warehouses"
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Record stock additions and usage. Sales, received purchases and linked harvests also affect balances."
+  },
+  "equipment": {
+    "id": "equipment",
+    "label": "Equipment",
+    "group": "Resources",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Equipment name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "serial",
+        "label": "Registration / serial",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "kind",
+        "label": "Type",
+        "type": "select",
+        "required": true,
+        "options": ["Tractor", "Pump", "Vehicle", "Sprayer", "Tool", "Other"]
+      },
+      {
+        "key": "purchased_on",
+        "label": "Purchase date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "cost",
+        "label": "Purchase value",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "salvage",
+        "label": "Residual value",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "useful_years",
+        "label": "Useful life (years)",
+        "type": "number",
+        "required": true,
+        "min": 1,
+        "step": "0.01"
+      },
+      {
+        "key": "hours",
+        "label": "Operating hours",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "status",
+        "label": "Status",
+        "type": "select",
+        "required": true,
+        "options": ["Available", "Allocated", "Maintenance", "Retired"]
+      },
+      {
+        "key": "allocated_to",
+        "label": "Allocated to",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "next_due",
+        "label": "Next maintenance",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Track machinery, allocation and straight-line depreciation."
+  },
+  "maintenance": {
+    "id": "maintenance",
+    "label": "Maintenance & fuel",
+    "group": "Resources",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Maintenance record",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "equipment",
+        "label": "Equipment",
+        "type": "reference",
+        "required": true,
+        "ref": "equipment"
+      },
+      {
+        "key": "date",
+        "label": "Date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "kind",
+        "label": "Work type",
+        "type": "select",
+        "required": true,
+        "options": ["Service", "Repair", "Fuel", "Inspection"]
+      },
+      {
+        "key": "fuel",
+        "label": "Fuel (litres)",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "hours",
+        "label": "Operating hours",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "cost",
+        "label": "Cost",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "next_due",
+        "label": "Next service",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Record equipment service, repairs, fuel and operating costs."
+  },
+  "warehouses": {
+    "id": "warehouses",
+    "label": "Storage locations",
+    "group": "Resources",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Storage name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "kind",
+        "label": "Type",
+        "type": "select",
+        "required": true,
+        "options": ["Warehouse", "Cold room", "Silo", "Open storage", "Other"]
+      },
+      {
+        "key": "capacity",
+        "label": "Capacity (kg)",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "temperature",
+        "label": "Target temperature (°C)",
+        "type": "number",
+        "required": false,
+        "min": -100,
+        "step": "0.01"
+      },
+      {
+        "key": "location",
+        "label": "Location",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Register warehouses and cold storage."
+  },
+  "storage_lots": {
+    "id": "storage_lots",
+    "label": "Storage lots",
+    "group": "Resources",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Lot reference",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "item",
+        "label": "Item",
+        "type": "reference",
+        "required": true,
+        "ref": "inventory"
+      },
+      {
+        "key": "warehouse",
+        "label": "Warehouse",
+        "type": "reference",
+        "required": true,
+        "ref": "warehouses"
+      },
+      {
+        "key": "date",
+        "label": "Stored date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "quantity",
+        "label": "Quantity stored (kg)",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "spoilage",
+        "label": "Spoilage (kg)",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "grade",
+        "label": "Quality",
+        "type": "select",
+        "required": true,
+        "options": ["A", "B", "C", "At risk"]
+      },
+      {
+        "key": "dispatch_on",
+        "label": "Dispatch date",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "destination",
+        "label": "Dispatch destination",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Track storage duration, quality and dispatch. Record stock adjustments separately to avoid double counting."
+  },
+  "employees": {
+    "id": "employees",
+    "label": "Employees",
+    "group": "People & work",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Employee name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "role",
+        "label": "Job role",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "phone",
+        "label": "Phone",
+        "type": "tel",
+        "required": false
+      },
+      {
+        "key": "start_date",
+        "label": "Start date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "daily_rate",
+        "label": "Daily pay rate",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "status",
+        "label": "Status",
+        "type": "select",
+        "required": true,
+        "options": ["Active", "On leave", "Inactive"]
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Manage farm workers, roles and pay rates."
+  },
+  "tasks": {
+    "id": "tasks",
+    "label": "Tasks",
+    "group": "People & work",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Task",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "employee",
+        "label": "Assigned employee",
+        "type": "reference",
+        "required": false,
+        "ref": "employees"
+      },
+      {
+        "key": "date",
+        "label": "Due date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "priority",
+        "label": "Priority",
+        "type": "select",
+        "required": true,
+        "options": ["Low", "Normal", "High"]
+      },
+      {
+        "key": "status",
+        "label": "Status",
+        "type": "select",
+        "required": true,
+        "options": ["To do", "In progress", "Done", "Cancelled"]
+      },
+      {
+        "key": "hours",
+        "label": "Hours worked",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "output",
+        "label": "Output quantity",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "unit",
+        "label": "Output unit",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Allocate daily work and monitor progress and productivity."
+  },
+  "attendance": {
+    "id": "attendance",
+    "label": "Attendance",
+    "group": "People & work",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Attendance reference",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "employee",
+        "label": "Employee",
+        "type": "reference",
+        "required": true,
+        "ref": "employees"
+      },
+      {
+        "key": "date",
+        "label": "Date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "status",
+        "label": "Status",
+        "type": "select",
+        "required": true,
+        "options": ["Present", "Half day", "Absent", "Leave"]
+      },
+      {
+        "key": "hours",
+        "label": "Hours worked",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "pay",
+        "label": "Pay earned",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Record attendance and earned pay for payroll export."
+  },
+  "suppliers": {
+    "id": "suppliers",
+    "label": "Suppliers",
+    "group": "Trade & finance",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Supplier name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "contact",
+        "label": "Contact person",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "email",
+        "label": "Email",
+        "type": "email",
+        "required": false
+      },
+      {
+        "key": "phone",
+        "label": "Phone",
+        "type": "tel",
+        "required": false
+      },
+      {
+        "key": "products",
+        "label": "Products supplied",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "rating",
+        "label": "Performance rating (0–5)",
+        "type": "number",
+        "required": false,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "agreement",
+        "label": "Agreement terms",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Keep supplier contacts, performance and agreements."
+  },
+  "purchases": {
+    "id": "purchases",
+    "label": "Procurement",
+    "group": "Trade & finance",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Purchase order number",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "supplier",
+        "label": "Supplier",
+        "type": "reference",
+        "required": true,
+        "ref": "suppliers"
+      },
+      {
+        "key": "item",
+        "label": "Stock item",
+        "type": "reference",
+        "required": true,
+        "ref": "inventory"
+      },
+      {
+        "key": "quantity",
+        "label": "Quantity",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "unit_price",
+        "label": "Unit price",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "date",
+        "label": "Order date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "next_due",
+        "label": "Expected delivery",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "status",
+        "label": "Status",
+        "type": "select",
+        "required": true,
+        "options": ["Quotation", "Pending approval", "Approved", "Received", "Cancelled"]
+      },
+      {
+        "key": "terms",
+        "label": "Payment / quotation terms",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Approve purchases and receive stock. Only received orders increase inventory."
+  },
+  "customers": {
+    "id": "customers",
+    "label": "Customers",
+    "group": "Trade & finance",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Customer name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "contact",
+        "label": "Contact person",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "email",
+        "label": "Email",
+        "type": "email",
+        "required": false
+      },
+      {
+        "key": "phone",
+        "label": "Phone",
+        "type": "tel",
+        "required": false
+      },
+      {
+        "key": "destination",
+        "label": "Market destination",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "agreement",
+        "label": "Contract / agreement terms",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Manage buyers, market destinations and contract terms."
+  },
+  "sales": {
+    "id": "sales",
+    "label": "Sales & invoices",
+    "group": "Trade & finance",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Invoice number",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "customer",
+        "label": "Customer",
+        "type": "reference",
+        "required": true,
+        "ref": "customers"
+      },
+      {
+        "key": "item",
+        "label": "Stock item",
+        "type": "reference",
+        "required": true,
+        "ref": "inventory"
+      },
+      {
+        "key": "quantity",
+        "label": "Quantity",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "unit_price",
+        "label": "Unit price",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "date",
+        "label": "Invoice date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "next_due",
+        "label": "Payment due",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "status",
+        "label": "Status",
+        "type": "select",
+        "required": true,
+        "options": ["Draft", "Confirmed", "Cancelled"]
+      },
+      {
+        "key": "destination",
+        "label": "Delivery destination",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Issue printable invoices and record sales. Confirmed invoices reduce stock."
+  },
+  "payments": {
+    "id": "payments",
+    "label": "Payments",
+    "group": "Trade & finance",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Payment reference",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "direction",
+        "label": "Direction",
+        "type": "select",
+        "required": true,
+        "options": ["Income", "Expense"]
+      },
+      {
+        "key": "category",
+        "label": "Category",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sales",
+          "Inputs",
+          "Labour",
+          "Fuel",
+          "Equipment",
+          "Veterinary",
+          "Irrigation",
+          "Loan",
+          "Other"
+        ]
+      },
+      {
+        "key": "sale",
+        "label": "Sales invoice",
+        "type": "reference",
+        "required": false,
+        "ref": "sales"
+      },
+      {
+        "key": "purchase",
+        "label": "Purchase order",
+        "type": "reference",
+        "required": false,
+        "ref": "purchases"
+      },
+      {
+        "key": "planting",
+        "label": "Planting / cost allocation",
+        "type": "reference",
+        "required": false,
+        "ref": "plantings"
+      },
+      {
+        "key": "date",
+        "label": "Payment date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "amount",
+        "label": "Amount",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "method",
+        "label": "Method",
+        "type": "select",
+        "required": true,
+        "options": ["Cash", "Bank transfer", "Mobile money", "Cheque", "Other"]
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Track actual income and expenditure. Invoice totals and cash flow are reported separately."
+  },
+  "budgets": {
+    "id": "budgets",
+    "label": "Budgets",
+    "group": "Trade & finance",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Budget name",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "category",
+        "label": "Category",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inputs",
+          "Labour",
+          "Fuel",
+          "Equipment",
+          "Veterinary",
+          "Irrigation",
+          "Loan",
+          "Other"
+        ]
+      },
+      {
+        "key": "date",
+        "label": "Start date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "end_date",
+        "label": "End date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "amount",
+        "label": "Budget amount",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Compare planned spending with recorded cash expenditure."
+  },
+  "loans": {
+    "id": "loans",
+    "label": "Loans",
+    "group": "Trade & finance",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Loan reference",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "lender",
+        "label": "Lender",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "principal",
+        "label": "Principal",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "rate",
+        "label": "Annual interest rate (%)",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "date",
+        "label": "Start date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "next_due",
+        "label": "Repayment due",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "repaid",
+        "label": "Principal repaid",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "status",
+        "label": "Status",
+        "type": "select",
+        "required": true,
+        "options": ["Active", "Settled"]
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Track borrowing, principal repayments and due dates."
+  },
+  "market_prices": {
+    "id": "market_prices",
+    "label": "Market prices",
+    "group": "Insights",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Price observation",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "crop",
+        "label": "Crop variety",
+        "type": "reference",
+        "required": true,
+        "ref": "crops"
+      },
+      {
+        "key": "market",
+        "label": "Market",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "date",
+        "label": "Observation date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "price",
+        "label": "Price per kg",
+        "type": "number",
+        "required": true,
+        "min": 0.01,
+        "step": "0.01"
+      },
+      {
+        "key": "demand",
+        "label": "Demand",
+        "type": "select",
+        "required": true,
+        "options": ["Low", "Normal", "High"]
+      },
+      {
+        "key": "source",
+        "label": "Source",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Record sourced market prices and compare price and demand trends."
+  },
+  "weather_logs": {
+    "id": "weather_logs",
+    "label": "Weather records",
+    "group": "Insights",
+    "fields": [
+      {
+        "key": "name",
+        "label": "Weather observation",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "farm",
+        "label": "Farm",
+        "type": "reference",
+        "required": true,
+        "ref": "farms"
+      },
+      {
+        "key": "date",
+        "label": "Date",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "rainfall",
+        "label": "Rainfall (mm)",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "temperature",
+        "label": "Temperature (°C)",
+        "type": "number",
+        "required": true,
+        "min": -100,
+        "step": "0.01"
+      },
+      {
+        "key": "humidity",
+        "label": "Humidity (%)",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "wind",
+        "label": "Wind speed (km/h)",
+        "type": "number",
+        "required": true,
+        "min": 0,
+        "step": "0.01"
+      },
+      {
+        "key": "source",
+        "label": "Source",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "notes",
+        "label": "Notes",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "description": "Keep local rainfall and environmental history alongside live forecasts."
+  }
+}
